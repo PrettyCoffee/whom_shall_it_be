@@ -8,11 +8,11 @@ export type person = {
 
 export const persons:person[] = [
 	{
-		not_id: 1337,
+		not_id: 2,
 		name: "Ponas",
-		temp: 20,
-		likes: "Unicorns",
-		gender: true
+		temp: 34,
+		likes: "Wahnsinn",
+		gender: false
 	},
 	{
 		not_id: 42,
@@ -22,23 +22,23 @@ export const persons:person[] = [
 		gender: true
 	},
 	{
-		not_id: 42,
+		not_id: 6,
 		name: "Amam",
-		temp: 18,
-		likes: "Doggos",
+		temp: 22,
+		likes: "Pizza",
 		gender: false
 	},
 	{
 		not_id: 420,
 		name: "Jemmer",
-		temp: 20,
-		likes: "Beer",
+		temp: 24,
+		likes: "schlafen",
 		gender: false
 	},
 	{
 		not_id: 666,
 		name: "Philler",
-		temp: 15,
+		temp: 20,
 		likes: "Linux",
 		gender: false
 	},
@@ -49,11 +49,11 @@ export const persons:person[] = [
 		likes: "golang",
 		gender: true
 	},
+	{
+		not_id: 5,
+		name: "Kefkef",
+		temp: 30,
+		likes: "Whisky",
+		gender: true
+	},
 ]
-
-/* Umfrage:
-Was ist deine Temperatur?
-Welche Zahl?
-Wähle ein Geschlecht: True | False (Wenn alle das Gleiche nehmen, nehme ich Männer = true)
-Was magst du? (Ein Wort)
-*/

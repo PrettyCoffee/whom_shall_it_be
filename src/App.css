@@ -1,8 +1,8 @@
 :root {
 	--bg-color: rgba(46,46,46,1);
-	--default-color: rgba(230,230,230,1);
-	--accent-color: rgba(50,200,150,0.3);
-	--accent-color2: rgba(200, 50, 50, 0.3);
+	--default-color: rgba(220,220,220,1);
+	--accent-color: rgb(101, 129, 255);
+	--accent-color2: rgb(226, 73, 73);
 	/* Articles */
 	--article-width:80%;
 }
@@ -16,10 +16,14 @@ body {
 	font-size: 12pt;
 }
 
+h2{
+    padding: 0px 60px 10px 60px;
+    border-bottom: 2px solid var(--accent-color2);
+}
+
 .main-wrapper {
 	display: flex;
 	flex-direction: column;
-	flex-wrap: nowrap;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
@@ -28,19 +32,79 @@ body {
 }
 
 .button{
+    position: relative;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+    align-items: center;
+    width:300px;
+    height:20px;
 	background-color: var(--default-color);
-  color: var(--bg-color);
-  cursor: pointer;
+    color: var(--bg-color);
+    cursor: pointer;
 	padding: 7px 20px 7px 20px;
-	transition: .3s;
+    transition: .3s;
+    opacity:0.7;
+    z-index: 100;
+    border-radius: 0px 20px 0px 20px;
 }
 
 .button:hover{
-	filter: drop-shadow(5px 5px 0 var(--accent-color)) drop-shadow(-5px -5px 0 var(--accent-color2));
+    opacity:1;
+}
+
+.button::after, .button::before{
+    content: "";
+    position: absolute;
+    width:100%;
+    height:100%;
+    background: var(--accent-color2);
+    clip-path: polygon(0 0);
+}
+
+.button:hover::before{
+    left:-2.5px;
+    top:-2.5px;
+    clip-path: polygon(0 0, 320px 0, 320px 5px, 5px 5px, 5px 20px, 0 20px);
+    animation: corner-lt 1.5s ease-out;
+}
+
+.button:hover::after{
+    left:2.5px;
+    top:2.5px;
+    animation: corner-rb 1.5s ease-out;
+    clip-path: polygon(340px 34px, 20px 34px, 20px 29px, 335px 29px, 335px 14px, 340px 14px);
+}
+
+
+@keyframes corner-lt {
+    0% {
+        clip-path: polygon(0px 20px, 5px 20px, 5px 20px, 5px 20px, 5px 20px, 0px 20px);
+    }
+    15% {
+        clip-path: polygon(0px 0px, 5px 0px, 5px 5px, 5px 5px, 5px 20px, 0px 20px);
+    }
+   /* Old Anim 5% {clip-path: polygon(0 0, 5px 0, 5px 5px, 5px 5px, 5px 5px, 0 5px);} 10% {clip-path: polygon(0 0, 15px 0, 15px 5px, 5px 5px, 5px 15px, 0 15px);}*/
+    100% {
+        clip-path: polygon(0 0, 320px 0, 320px 5px, 5px 5px, 5px 20px, 0 20px);
+    }
+}
+@keyframes corner-rb {
+    0% {
+        clip-path: polygon(340px 14px, 340px 14px, 335px 14px, 335px 14px, 335px 14px, 340px 14px);
+    }
+    15% {
+        clip-path: polygon(340px 34px, 335px 34px, 335px 29px, 335px 29px, 335px 14px, 340px 14px);
+    }
+    /*Old Anim 5% {clip-path: polygon(340px 34px, 335px 34px, 335px 29px, 335px 29px, 335px 29px, 340px 29px);} 10% {clip-path: polygon(340px 34px, 325px 34px, 325px 29px, 335px 29px, 335px 19px, 340px 19px);}*/
+    100% {
+        clip-path: polygon(340px 34px, 20px 34px, 20px 29px, 335px 29px, 335px 14px, 340px 14px);
+    }
 }
 
 .resetButton{
-	margin-top: 100px;
+	margin-top: 20px;
 }
 
 .result-text{
@@ -53,11 +117,13 @@ body {
 /*https://codepen.io/hi-im-si/pen/oXyqjG*/
 
 .glitch {
+    margin: 30px 0px 30px 0px;
     font-family: "Exo", sans-serif;
     text-transform: uppercase;
     transform: scale3d(1, 1, 1);
     transition: 1s;
     background-color: var(--bg-color);
+    color: white;
     letter-spacing: 9px;
 }
 .glitch::before, .glitch::after {
@@ -65,7 +131,7 @@ body {
     position: absolute;
     overflow: hidden;
     background: var(--bg-color);
-    color: var(--default-color);
+    color: whitw;
     clip: rect(0, 900px, 0, 0);
 }
 .glitch::before {
