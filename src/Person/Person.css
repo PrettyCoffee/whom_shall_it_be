@@ -1,0 +1,199 @@
+div.pokemon-pic{
+    position: relative;
+}
+div.pokemon-pic > img{
+    position: absolute;
+    height:150px;
+}
+div.pokemon-pic.left > img{
+    left: -350px;
+    top:0px;
+}
+div.pokemon-pic.right > img{
+    right: -350px;
+    top:0px;
+}
+
+div.person-details{
+    width: 280px;
+}
+
+div.person-details > div{
+    font-size: 15pt;
+    border-top: 2px solid var(--accent-color2);
+    height:40px;
+    cursor: pointer;
+    
+    position:relative;
+
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+    align-items: center;
+}
+div.person-details > div:after, div.person-details > div:before{
+    content: "";
+    height:15px;
+    width:15px;
+    background-color: var(--accent-color2);
+    position:absolute;
+    top:15px;
+    transition: .3s;
+}
+div.person-details > div:after{
+    right:20px;
+}
+div.person-details > div:before{
+    left:20px;
+}
+
+div.person-details > div:after, div.person-details > div:before{
+    clip-path: polygon(25% 75%, 75% 75%, 75% 25%, 25% 25%);
+}
+
+div.person-details > div.details-closed:hover:after, div.person-details > div.details-closed:hover:before{
+    clip-path: polygon(0% 50%, 50% 100%, 100% 50%);
+    animation: rotate-effect .6s infinite linear;
+}
+
+div.person-details > div.details-opened:after, div.person-details > div.details-opened:before{
+    clip-path: polygon(0% 50%, 50% 100%, 100% 50%);
+    animation: rotate-effect .6s infinite linear;
+}
+
+@keyframes rotate-effect {
+    0%  { clip-path: polygon(50% 100%, 100% 50%, 50% 0%);   }
+
+    /* first rotation */
+    4%  { clip-path: polygon(100% 50%, 100% 50%, 50% 0%);   }
+    8%  { clip-path: polygon(0% 50%, 100% 50%, 50% 0%);     }
+    
+    12% { clip-path: polygon(0% 50%, 50% 0%, 50% 0%);       }
+    16% { clip-path: polygon(0% 50%, 50% 100%, 50% 0%);     }
+    
+    20% { clip-path: polygon(0% 50%, 50% 100%, 0% 50%);     }
+    24% { clip-path: polygon(0% 50%, 50% 100%, 100% 50%);   }
+    
+    28% { clip-path: polygon(50% 100%, 50% 100%, 100% 50%); }
+    32% { clip-path: polygon(50% 0%, 50% 100%, 100% 50%);   }
+    
+    /* second rotation */
+    37% { clip-path: polygon(50% 0%, 100% 50%, 100% 50%);   }
+    41% { clip-path: polygon(50% 0%, 0% 50%, 100% 50%);     }
+    
+    45% { clip-path: polygon(50% 0%, 0% 50%, 50% 0%);       }
+    49% { clip-path: polygon(50% 0%, 0% 50%, 50% 100%);     }
+    
+    53% { clip-path: polygon(0% 50%, 0% 50%, 50% 100%);     }
+    57% { clip-path: polygon(100% 50%, 0% 50%, 50% 100%);   }
+    
+    61% { clip-path: polygon(100% 50%, 50% 100%, 50% 100%); }
+    65% { clip-path: polygon(100% 50%, 50% 0%, 50% 100%);   }
+    
+    /* third rotation */
+    70% { clip-path: polygon(100% 50%, 50% 0%, 100% 50%);   }
+    74% { clip-path: polygon(100% 50%, 50% 0%, 0% 50%);     }
+    
+    78% { clip-path: polygon(50% 0%, 50% 0%, 0% 50%);       }
+    82% { clip-path: polygon(50% 100%, 50% 0%, 0% 50%);     }
+    
+    87% { clip-path: polygon(50% 100%, 0% 50%, 0% 50%);     }
+    91% { clip-path: polygon(50% 100%, 100% 50%, 0% 50%);   }
+    
+    95% { clip-path: polygon(50% 100%, 100% 50%, 50% 100%); }
+    100% { clip-path: polygon(50% 100%, 100% 50%, 50% 0%);  }
+}
+
+/* Copy pasted glitch effect */
+/*https://codepen.io/hi-im-si/pen/oXyqjG*/
+
+.glitch {
+    margin: 30px 0px 30px 0px;
+    font-family: "Exo", sans-serif;
+    text-transform: uppercase;
+    transform: scale3d(1, 1, 1);
+    transition: 1s;
+    background-color: var(--bg-color);
+    color: white;
+    letter-spacing: 9px;
+}
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    overflow: hidden;
+    background: var(--bg-color);
+    color: white;
+    clip: rect(0, 900px, 0, 0);
+}
+.glitch::before {
+    left: 1px;
+    text-shadow: 2px 0 var(--accent-color);
+    animation: glitch-effect .6s infinite linear alternate-reverse;
+}
+.glitch::after {
+    right: 0.5px;
+    text-shadow: -2px 0 var(--accent-color2);
+    animation: glitch-effect .3s infinite linear alternate-reverse;
+}
+@keyframes glitch-effect {
+    0% {
+        clip: rect(9px, 9999px, 99px, 0);
+   }
+    10% {
+        clip: rect(88px, 9999px, 28px, 0);
+   }
+    20% {
+        clip: rect(50px, 9999px, 17px, 0);
+   }
+    30% {
+        clip: rect(19px, 9999px, 30px, 0);
+   }
+    40% {
+        clip: rect(90px, 9999px, 51px, 0);
+   }
+    50% {
+        clip: rect(47px, 9999px, 71px, 0);
+   }
+    60% {
+        clip: rect(55px, 9999px, 69px, 0);
+   }
+    70% {
+        clip: rect(1px, 9999px, 42px, 0);
+   }
+    80% {
+        clip: rect(7px, 9999px, 9px, 0);
+   }
+    90% {
+        clip: rect(91px, 9999px, 81px, 0);
+   }
+    100% {
+        clip: rect(25px, 9999px, 12px, 0);
+   }
+}
+
+
+@media only screen and (max-width: 700px) {
+    div.main-wrapper{
+        justify-content: flex-start;
+    }
+    div.pokemon-pic.left{
+        display:none;
+    }
+    div.pokemon-pic.right > img{
+        position: static;
+    }
+    .glitch{
+        margin-top: 0px;
+    }
+}
+@media only screen and (max-width: 350px) {
+    div.pokemon-pic.right > img{
+        position: static;
+    }
+    .result-text{
+        font-size: 30pt;
+    }
+    h2{
+        font-size: 20px;
+    }
+}

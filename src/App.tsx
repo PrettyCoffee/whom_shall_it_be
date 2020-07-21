@@ -8,6 +8,8 @@ function App() {
 	const [chosen, setChosen]:person|any = useState(undefined)
 	const [pokemons, setPokemons]:any = useState([])
 
+	let date = new Date().getDate()
+
 	var currTemp:number|undefined = undefined
 	useEffect(() => {
 		fetch("https://fcc-weather-api.glitch.me/api/current?lat=48.796043&lon=9.009571")
@@ -15,32 +17,40 @@ function App() {
 		.then(result => {
 			currTemp=result.main.temp
 		})
+		let tmpPokemons:any[] = []
 		persons.forEach((person)=>{
 			let request = new XMLHttpRequest()
-			let pokeurl = 'https://pokeapi.co/api/v2/pokemon/' + (person.not_id % 806)
+			let pokeurl = 'https://pokeapi.co/api/v2/pokemon/' + ((person.not_id * date) % 806)
 			request.open('GET', pokeurl, false)  // `false` makes the request synchronous
 			request.send(null);
-			pokemons.push(JSON.parse(request.responseText))
+			tmpPokemons.push(JSON.parse(request.responseText))
+			setPokemons(tmpPokemons)
 		})
 	}, [])
 	let getSomebody = async () => {
-		let factors:number[] = []
+		let tmpFactor:number = 1
+		let details:{
+			"name":string,
+			"pokemon":any,
+			"currTemp":number|undefined,
+			"factor":number,
+		}[] = []
 		//Get factors of persons which are not random
 		for (let i = 0; i < persons.length; i++) {
-			factors.push(1)
+			tmpFactor = 1
 
 			//change factor based on weather
 			//Dont question this, it does not make any sense
 			if (currTemp) {
-				factors[i] *= (currTemp + 0.1 - persons[i].temp)%4.321
-				factors[i] += 10
+				tmpFactor *= (currTemp + 0.1 - persons[i].temp)%4.321
+				tmpFactor += 10
 			} else {
-				factors[i] *= persons[i].temp % 4.321
-				factors[i] += 10
+				tmpFactor *= persons[i].temp % 4.321
+				tmpFactor += 10
 			}
 
 			//change factor based on not_id and pokemon and unix date
-			factors[i] *= new Date().getTime() * (
+			tmpFactor *= new Date().getTime() * (
 				(pokemons[i].weight / pokemons[i].base_experience) 
 				* pokemons[i].stats[Math.floor(Math.random() * pokemons[i].stats.length)].base_stat
 			) % 100
@@ -68,11 +78,18 @@ function App() {
 					}
 				}
 			}
-			factors[i] *= tmpNum
+			tmpFactor *= tmpNum
 
 			//Only numbers between 0 and 99
-			factors[i] %= 100//(100 / persons.length)
-			factors[i] = Math.floor(factors[i])
+			tmpFactor %= 100//(100 / persons.length)
+			tmpFactor = Math.floor(tmpFactor)
+
+			details.push({
+				"name":persons[i].name,
+				"pokemon":pokemons[i],
+				"currTemp":currTemp,
+				"factor":tmpFactor,
+			}) 
 		}
 
 		
@@ -80,8 +97,8 @@ function App() {
 		for ( ;true; ) {
 			let randPers = Math.floor(Math.random() * persons.length)
 			let randNum = Math.floor(Math.random() * 100)
-			setChosen(persons[randPers])
-			if (factors[randPers] < randNum + 1 && factors[randPers] > randNum - 1) {
+			setChosen(details[randPers])
+			if (details[randPers].factor < randNum + 1 && details[randPers].factor > randNum - 1) {
 				break;
 			}
 			await sleep(10)
